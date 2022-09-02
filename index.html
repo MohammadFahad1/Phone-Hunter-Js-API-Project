@@ -38,8 +38,22 @@
         <!-- Display Search Results -->
         <section>
             <div class="row row-cols-1 row-cols-md-4 g-4" id="phones-container">
-
+                <!-- We can add spinner right here
+                <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+                <span class="visually-hidden">Loading...</span>
+                </div>
+                -->
             </div>
+            <div id="not-found-msg" class="d-none">
+                <h3 class="text-warning mt-4">No Phone Found</h3>
+            </div>
+
+            <!-- Loader -->
+            <section id="loader" class="d-none justify-content-center py-5">
+                <div class="spinner-grow bg-info" style="width: 6rem; height: 6rem;" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </section>
         </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
