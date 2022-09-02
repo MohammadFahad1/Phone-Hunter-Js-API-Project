@@ -1,4 +1,4 @@
-const loadPhones = async (searchText) => {
+const loadPhones = async (searchText, dataLimit) => {
 
     toggleSpinner(true);
     // Start Loading Spinner
@@ -6,10 +6,10 @@ const loadPhones = async (searchText) => {
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
     const res = await fetch(url);
     const data = await res.json();
-    displayPhones(data.data);
+    displayPhones(data.data, dataLimit);
 }
 
-const displayPhones = phones => {
+const displayPhones = (phones, dataLimit) => {
     const phonesContainer = document.getElementById('phones-container');
     phonesContainer.innerHTML = '';
 
@@ -22,7 +22,14 @@ const displayPhones = phones => {
     }
 
     // Display 20 phones only
-    phones = phones.slice(0, 10);
+    const showAll = document.getElementById('show-all');
+    if (dataLimit && phones.length > 10) {
+        phones = phones.slice(0, dataLimit);
+        showAll.classList.remove('d-none')
+    } else {
+        showAll.classList.add('d-none');
+    }
+
     phones.forEach(phone => {
         const phoneDiv = document.createElement('div');
         phoneDiv.classList.add('col');
@@ -42,13 +49,21 @@ const displayPhones = phones => {
     toggleSpinner(false)
 }
 
-document.getElementById('btn-search').addEventListener('click', function () {
+const processSearch = (dataLimit) => {
     // Start Loader Spinner
     toggleSpinner(true);
-
     const searchField = document.getElementById('search-text');
     const searchText = searchField.value;
-    loadPhones(searchText);
+    loadPhones(searchText, dataLimit);
+}
+
+document.getElementById('btn-search').addEventListener('click', function () {
+    processSearch(10);
+});
+
+// Not the best way to load all
+document.getElementById('btn-show-all').addEventListener('click', function () {
+    processSearch();
 });
 
 const toggleSpinner = isLoading => {
@@ -62,5 +77,6 @@ const toggleSpinner = isLoading => {
     }
 }
 
-loadPhones('a');
+// We are loading reno series phones by default
+loadPhones('reno');
 

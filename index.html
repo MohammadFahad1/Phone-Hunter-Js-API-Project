@@ -34,7 +34,7 @@
         </nav>
         <h1 class="text-center py-3 text-danger">Welcome to Phone Hunter!</h1>
     </header>
-    <main class="container">
+    <main class="container py-5">
         <!-- Display Search Results -->
         <section>
             <div class="row row-cols-1 row-cols-md-4 g-4" id="phones-container">
@@ -46,6 +46,9 @@
             </div>
             <div id="not-found-msg" class="d-none">
                 <h3 class="text-warning mt-4">No Phone Found</h3>
+            </div>
+            <div class="text-center d-none my-4" id="show-all">
+                <button class="btn btn-primary" id="btn-show-all">Show All</button>
             </div>
 
             <!-- Loader -->
